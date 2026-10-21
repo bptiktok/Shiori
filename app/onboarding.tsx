@@ -186,27 +186,27 @@ const OnboardingScreen = () => {
   // Polished Modern Steps
   const onboardingSteps: OnboardingStep[] = [
     {
-      title: 'Welcome to Shiori',
-      subtitle: 'CURATED WALLPAPERS',
-      description: 'Immerse your screen in stunning artwork crafted by top artists worldwide. Fresh inspiration, daily.',
+      title: '欢迎来到 Shiori',
+      subtitle: '精选壁纸',
+      description: '让屏幕沉浸在来自全球顶尖艺术家创作的惊艳作品中，每天都有新灵感。',
       lottie: 'welcome',
       gradientColors: theme.dark 
         ? ['#0F0F12', '#1B1C2A'] as const
         : ['#FFFFFF', '#F0F3F8'] as const
     },
     {
-      title: 'Discover & Personalize',
-      subtitle: 'INFINITE EXPLORATION',
-      description: 'Filter effortlessly by ultra-HD resolutions, rich color palettes, and curated collections.',
+      title: '发现与个性化',
+      subtitle: '无限探索',
+      description: '按超高清分辨率、丰富的色板和精选合集轻松筛选。',
       lottie: 'search',
       gradientColors: theme.dark 
         ? ['#0F0F12', '#122538'] as const
         : ['#FFFFFF', '#EBF3FE'] as const
     },
     {
-      title: 'Terms of Service',
-      subtitle: 'TRANSPARENT & SECURE',
-      description: 'We respect your privacy. Review and accept our terms to establish your personalized space.',
+      title: '服务条款',
+      subtitle: '透明与安全',
+      description: '我们尊重您的隐私。请查看并接受我们的条款，以创建您的个性化空间。',
       lottie: 'document',
       gradientColors: theme.dark 
         ? ['#0F0F12', '#1E1B33'] as const
@@ -214,9 +214,9 @@ const OnboardingScreen = () => {
       showAgreement: true
     },
     {
-      title: "You're All Set!",
-      subtitle: 'READY TO ELEVATE',
-      description: 'Your setup is complete. Step inside and transform your mobile screen experience today.',
+      title: "一切就绪！",
+      subtitle: '准备开始',
+      description: '设置完成。现在就进来，改造你的手机屏幕体验吧。',
       lottie: 'confetti',
       gradientColors: theme.dark 
         ? ['#0F0F12', '#0A2925'] as const
@@ -392,7 +392,7 @@ const OnboardingScreen = () => {
                   )}
                   compact
                 >
-                  Back
+                  上一步
                 </Button>
               </Animated.View>
             )}
@@ -410,7 +410,7 @@ const OnboardingScreen = () => {
                 )}
                 compact
               >
-                Settings
+                设置
               </Button>
             </Animated.View>
 
@@ -423,7 +423,7 @@ const OnboardingScreen = () => {
                   labelStyle={{ fontFamily: 'Nunito-Bold', fontSize: 14 }}
                   compact
                 >
-                  Skip
+                  跳过
                 </Button>
               </Animated.View>
             )}
@@ -480,7 +480,7 @@ const OnboardingScreen = () => {
                     <DocumentText1 size={18} color={color} variant="Broken" />
                   )}
                 >
-                  Review Terms & Conditions
+                  查看条款与条件
                 </Button>
               )}
               
@@ -492,7 +492,7 @@ const OnboardingScreen = () => {
                     variant="Broken"
                   />
                   <Text style={{ color: theme.colors.primary, fontFamily: 'Nunito-Bold', fontSize: 13 }}>
-                    Terms Accepted
+                    条款已接受
                   </Text>
                 </View>
               )}
@@ -536,7 +536,7 @@ const OnboardingScreen = () => {
                   )
                 }
               >
-                {currentStep === onboardingSteps.length - 1 ? 'Get Started' : 'Continue'}
+                {currentStep === onboardingSteps.length - 1 ? '开始使用' : '继续'}
               </Button>
             </Animated.View>
           </Animated.View>
@@ -549,7 +549,7 @@ const OnboardingScreen = () => {
               color: theme.dark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)',
               fontFamily: 'Nunito-SemiBold'
             }]}>
-              Step {currentStep + 1} of {onboardingSteps.length}
+              第 {currentStep + 1} 步，共 {onboardingSteps.length} 步
             </Text>
           </Animated.View>
         </View>
@@ -564,7 +564,7 @@ const OnboardingScreen = () => {
         >
           <Card style={styles.modalCard}>
             <Card.Title 
-              title="Terms & Conditions" 
+              title="条款与条件" 
               titleStyle={{ fontFamily: 'Nunito-Bold', fontSize: 18 }}
               left={(props) => <DocumentText1 size={24} color={theme.colors.primary} variant="Broken" />}
             />
@@ -576,30 +576,30 @@ const OnboardingScreen = () => {
                   color: theme.colors.onSurface,
                   fontSize: 14
                 }}>
-                  1. Acceptance of Terms{'\n\n'}
-                  By using Shiori, you agree to these terms and conditions. These terms apply to all users of the application.
+                  1. 条款接受{'\n\n'}
+                  使用 Shiori 即表示您同意这些条款与条件。这些条款适用于本应用的所有用户。
                   {'\n\n'}
-                  2. Wallpaper Content{'\n\n'}
-                  • All wallpapers are sourced from Wallhaven and are subject to their respective licenses.{'\n'}
-                  • Some wallpapers may require a Wallhaven API key to access.{'\n'}
-                  • Users must comply with content ratings and restrictions.
+                  2. 壁纸内容{'\n\n'}
+                  • 所有壁纸均来自 Wallhaven，并受其各自许可协议约束。{'\n'}
+                  • 部分壁纸可能需要 Wallhaven API 密钥才能访问。{'\n'}
+                  • 用户必须遵守内容分级与访问限制。
                   {'\n\n'}
-                  3. User Responsibilities{'\n\n'}
-                  • You agree to use the app for personal, non-commercial purposes.{'\n'}
-                  • You will not attempt to circumvent any content restrictions.{'\n'}
-                  • You are responsible for any data charges incurred while using the app.
+                  3. 用户责任{'\n\n'}
+                  • 您同意仅将本应用用于个人、非商业目的。{'\n'}
+                  • 您不得尝试绕过任何内容限制。{'\n'}
+                  • 使用本应用产生的任何数据费用由您自行承担。
                   {'\n\n'}
-                  4. Privacy & Data{'\n\n'}
-                  • We collect minimal data necessary for app functionality.{'\n'}
-                  • Your Wallhaven API key, if provided, is stored securely on your device.{'\n'}
-                  • We do not share any personal information with third parties.
+                  4. 隐私与数据{'\n\n'}
+                  • 我们仅收集应用功能所必需的最少数据。{'\n'}
+                  • 您提供的 Wallhaven API 密钥将安全存储在您的设备上。{'\n'}
+                  • 我们不会与第三方共享任何个人信息。
                   {'\n\n'}
-                  5. Content Restrictions{'\n\n'}
-                  • NSFW content requires age verification and a valid Wallhaven API key.{'\n'}
-                  • Users must comply with their local laws regarding content access.
+                  5. 内容限制{'\n\n'}
+                  • NSFW 内容需要年龄验证以及有效的 Wallhaven API 密钥。{'\n'}
+                  • 用户必须遵守当地有关内容访问的法律法规。
                   {'\n\n'}
-                  6. Changes to Terms{'\n\n'}
-                  We reserve the right to modify these terms at any time. Continued use of the app constitutes acceptance of any changes.
+                  6. 条款变更{'\n\n'}
+                  我们保留随时修改这些条款的权利。继续使用本应用即表示接受任何变更。
                 </Text>
               </ScrollView>
             </Card.Content>
@@ -612,7 +612,7 @@ const OnboardingScreen = () => {
                   <CloseCircle size={18} color={color} variant="Broken" />
                 )}
               >
-                Decline
+                拒绝
               </Button>
               <Button 
                 mode="contained"
@@ -628,7 +628,7 @@ const OnboardingScreen = () => {
                   <TickCircle size={18} color={color} variant="Broken" />
                 )}
               >
-                Accept
+                接受
               </Button>
             </Card.Actions>
           </Card>
@@ -644,7 +644,7 @@ const OnboardingScreen = () => {
         >
           <Card style={styles.modalCard}>
             <Card.Title 
-              title="Preferences" 
+              title="偏好设置" 
               titleStyle={{ fontFamily: 'Nunito-Bold', fontSize: 18 }}
             />
             <Card.Content>
@@ -653,7 +653,7 @@ const OnboardingScreen = () => {
                   fontFamily: 'Nunito-SemiBold',
                   color: theme.colors.onSurface,
                   fontSize: 15
-                }}>Haptic Feedback</Text>
+                }}>振动反馈</Text>
                 <Button
                   mode={hapticFeedback ? "contained" : "outlined"}
                   onPress={() => setHapticFeedback(!hapticFeedback)}
@@ -661,7 +661,7 @@ const OnboardingScreen = () => {
                   labelStyle={{ fontFamily: 'Nunito-Bold' }}
                   compact
                 >
-                  {hapticFeedback ? 'On' : 'Off'}
+                  {hapticFeedback ? '开' : '关'}
                 </Button>
               </View>
               
@@ -670,7 +670,7 @@ const OnboardingScreen = () => {
                   fontFamily: 'Nunito-SemiBold',
                   color: theme.colors.onSurface,
                   fontSize: 15
-                }}>Sound Effects</Text>
+                }}>音效</Text>
                 <Button
                   mode={soundEffects ? "contained" : "outlined"}
                   onPress={() => setSoundEffects(!soundEffects)}
@@ -678,7 +678,7 @@ const OnboardingScreen = () => {
                   labelStyle={{ fontFamily: 'Nunito-Bold' }}
                   compact
                 >
-                  {soundEffects ? 'On' : 'Off'}
+                  {soundEffects ? '开' : '关'}
                 </Button>
               </View>
               
@@ -691,7 +691,7 @@ const OnboardingScreen = () => {
                   marginLeft: 10,
                   flex: 1
                 }}>
-                  Settings will be applied across your Shiori experience.
+                  这些设置将应用于您的 Shiori 使用体验。
                 </Text>
               </View>
             </Card.Content>
@@ -702,7 +702,7 @@ const OnboardingScreen = () => {
                 style={{ backgroundColor: theme.colors.primary, borderRadius: 12, width: '100%' }}
                 labelStyle={{ fontFamily: 'Nunito-Bold' }}
               >
-                Done
+                完成
               </Button>
             </Card.Actions>
           </Card>
