@@ -259,11 +259,11 @@ export default function SettingsScreen() {
 
       // Show Material Design success dialog
       Alert.alert(
-        'Success',
-        'You have been signed out successfully.',
+        '成功',
+        '您已成功退出登录。',
         [
           {
-            text: 'OK',
+            text: '确定',
             style: 'default',
             onPress: () => { }
           }
@@ -275,11 +275,11 @@ export default function SettingsScreen() {
     } catch (error) {
       console.error('Failed to sign out:', error);
       Alert.alert(
-        'Error',
-        'Failed to sign out. Please try again.',
+        '错误',
+        '退出登录失败，请重试。',
         [
           {
-            text: 'OK',
+            text: '确定',
             style: 'default',
             onPress: () => { }
           }
@@ -321,11 +321,11 @@ export default function SettingsScreen() {
 
           // Show Material Design success dialog
           Alert.alert(
-            'Success',
-            'Successfully connected to Wallhaven!',
+            '成功',
+            '已成功连接 Wallhaven！',
             [
               {
-                text: 'OK',
+                text: '确定',
                 style: 'default',
                 onPress: () => { }
               }
@@ -338,11 +338,11 @@ export default function SettingsScreen() {
           console.error('API validation failed:', apiError);
           updateAuthState({ loading: false });
           Alert.alert(
-            'Invalid API Key',
-            'The API key could not be verified. Please check and try again.',
+            'API 密钥无效',
+            '无法验证该 API 密钥，请检查后重试。',
             [
               {
-                text: 'OK',
+                text: '确定',
                 style: 'default',
                 onPress: () => { }
               }
@@ -356,11 +356,11 @@ export default function SettingsScreen() {
         console.error('Failed during API key processing:', error);
         updateAuthState({ loading: false });
         Alert.alert(
-          'Error',
-          'An error occurred while processing your login. Please try again.',
+          '错误',
+          '处理登录时发生错误，请重试。',
           [
             {
-              text: 'OK',
+              text: '确定',
               style: 'default',
               onPress: () => { }
             }
@@ -413,14 +413,14 @@ export default function SettingsScreen() {
 
         // Clear the input and show success
         updateAuthState({ apiKey: '' });
-        Alert.alert('Success', 'API key has been saved and verified successfully.');
+        Alert.alert('成功', 'API 密钥已保存并验证通过。');
       } catch (apiError) {
         // Invalid API key
-        Alert.alert('Invalid API Key', 'Please check your API key and try again.');
+        Alert.alert('API 密钥无效', '请检查您的 API 密钥后重试。');
       }
     } catch (error) {
       console.error('API key validation failed:', error);
-      Alert.alert('Error', 'Failed to validate API key. Please try again.');
+      Alert.alert('错误', '验证 API 密钥失败，请重试。');
     } finally {
       // Hide loading indicator
       setLoadingStates(prev => ({ ...prev, apiKey: false }));
@@ -432,12 +432,12 @@ export default function SettingsScreen() {
     if (value && !authState.hasApiKey) {
       // If trying to enable NSFW without API key, show API key dialog
       Alert.alert(
-        'API Key Required',
-        'To view NSFW content, you need to set your Wallhaven API key. You can get this from your Wallhaven account settings at wallhaven.cc.',
+        '需要 API 密钥',
+        '要查看 NSFW 内容，您需要设置 Wallhaven API 密钥。可在 wallhaven.cc 的 Wallhaven 账户设置中获取。',
         [
-          { text: 'Cancel', style: 'cancel' },
+          { text: '取消', style: 'cancel' },
           {
-            text: 'Set API Key',
+            text: '设置 API 密钥',
             onPress: () => updateAuthState({ wallhavenAuthVisible: true })
           }
         ]
@@ -540,16 +540,16 @@ export default function SettingsScreen() {
       router.push('/(tabs)/favorites');
 
       if (Platform.OS === 'android') {
-        ToastAndroid.show('Favorites cleared successfully', ToastAndroid.SHORT);
+        ToastAndroid.show('收藏已清除', ToastAndroid.SHORT);
       } else {
-        Alert.alert('Success', 'Favorites cleared successfully');
+        Alert.alert('成功', '收藏已清除');
       }
     } catch (error) {
       console.error('Failed to clear favorites:', error);
       if (Platform.OS === 'android') {
-        ToastAndroid.show('Failed to clear favorites', ToastAndroid.SHORT);
+        ToastAndroid.show('清除收藏失败', ToastAndroid.SHORT);
       } else {
-        Alert.alert('Error', 'Failed to clear favorites');
+        Alert.alert('错误', '清除收藏失败');
       }
     } finally {
       updateLoadingStates({ favorites: false });
@@ -594,9 +594,9 @@ export default function SettingsScreen() {
 
           // Show success toast
           if (Platform.OS === 'android') {
-            ToastAndroid.show('Font size updated', ToastAndroid.SHORT);
+            ToastAndroid.show('字号已更新', ToastAndroid.SHORT);
           } else {
-            Alert.alert('Success', 'Font size has been updated');
+            Alert.alert('成功', '字号已更新');
           }
 
           // Close dialog if this was called from the dialog buttons
@@ -719,11 +719,11 @@ export default function SettingsScreen() {
 
           // Show Material Design success dialog
           Alert.alert(
-            'Success',
-            'API key validated and saved successfully!',
+            '成功',
+            'API 密钥已验证并成功保存！',
             [
               {
-                text: 'OK',
+                text: '确定',
                 style: 'default',
                 onPress: () => { }
               }
@@ -736,11 +736,11 @@ export default function SettingsScreen() {
           console.error('API validation failed:', error);
           updateAuthState({ loading: false });
           Alert.alert(
-            'Invalid API Key',
-            'Please check your API key and try again.',
+            'API 密钥无效',
+            '请检查您的 API 密钥后重试。',
             [
               {
-                text: 'OK',
+                text: '确定',
                 style: 'default',
                 onPress: () => { }
               }
@@ -754,11 +754,11 @@ export default function SettingsScreen() {
         console.error('Failed to save API key:', error);
         updateAuthState({ loading: false });
         Alert.alert(
-          'Error',
-          'Failed to validate API key. Please try again.',
+          '错误',
+          '验证 API 密钥失败，请重试。',
           [
             {
-              text: 'OK',
+              text: '确定',
               style: 'default',
               onPress: () => { }
             }
@@ -773,11 +773,11 @@ export default function SettingsScreen() {
       }
     } else {
       Alert.alert(
-        'Error',
-        'Please enter a valid API key',
+        '错误',
+        '请输入有效的 API 密钥',
         [
           {
-            text: 'OK',
+            text: '确定',
             style: 'default',
             onPress: () => { }
           }
@@ -811,11 +811,11 @@ export default function SettingsScreen() {
       });
 
 
-      Alert.alert('Success', 'API key has been removed successfully.');
+      Alert.alert('成功', 'API 密钥已成功移除。');
     } catch (error) {
       console.error('Failed to remove API key:', error);
       updateAuthState({ loading: false });
-      Alert.alert('Error', 'Failed to remove API key. Please try again.');
+      Alert.alert('错误', '移除 API 密钥失败，请重试。');
     }
   };
 
@@ -833,9 +833,9 @@ export default function SettingsScreen() {
           updateLoadingStates({ downloadLocation: false });
           updateDialogStates({ downloadLocationVisible: false });
           if (Platform.OS === 'android') {
-            ToastAndroid.show('Download location updated', ToastAndroid.SHORT);
+            ToastAndroid.show('下载位置已更新', ToastAndroid.SHORT);
           } else {
-            Alert.alert('Success', 'Download location updated');
+            Alert.alert('成功', '下载位置已更新');
           }
         }, 600);
 
@@ -852,7 +852,7 @@ export default function SettingsScreen() {
         <StatusBar style="auto" />
         <Stack.Screen
           options={{
-            title: 'Settings',
+            title: '设置',
             headerShadowVisible: false,
           }}
         />
@@ -882,7 +882,7 @@ export default function SettingsScreen() {
                     v1.1.0
                   </Text>
                   <Text variant="bodySmall" style={[styles.userSubtitle, { fontSize: fontSizes.caption, color: paperTheme.colors.onSurfaceVariant }]}>
-                    {authState.hasApiKey ? 'API Key Connected' : 'Fine tune the app to work for you'}
+                    {authState.hasApiKey ? 'API 密钥已连接' : '按您的使用习惯调整应用'}
                   </Text>
                 </View>
               </View>
@@ -895,7 +895,7 @@ export default function SettingsScreen() {
                   disabled={authState.loading}
                   labelStyle={{ fontSize: fontSizes.body, fontFamily: 'Nunito-SemiBold', color: paperTheme.colors.onPrimary }}
                 >
-                  Sign Out
+                  退出登录
                 </Button>
               ) : (
                 <Button
@@ -908,7 +908,7 @@ export default function SettingsScreen() {
 
                   onPress={() => Linking.openURL('https://https://brian-ali.netlify.app/')}
                 >
-                  About Me.
+                  关于我
                 </Button>
               )}
             </Card.Content>
@@ -917,12 +917,12 @@ export default function SettingsScreen() {
           <Card style={styles.settingsSection} mode="elevated">
             <Card.Content>
               <Text variant="titleSmall" style={[styles.sectionTitle, { fontSize: fontSizes.caption }]}>
-                APPEARANCE
+                外观
               </Text>
               <List.Item
-                title="Font Size"
+                title="字号"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description={`${settings.fontSize.charAt(0).toUpperCase() + settings.fontSize.slice(1)} text scaling`}
+                description={`${settings.fontSize === 'small' ? '小' : settings.fontSize === 'medium' ? '中' : settings.fontSize === 'large' ? '大' : settings.fontSize}号文字`}
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => <List.Icon {...props} icon={({ size, color }) => (
                   <Setting2 variant="Broken" size={size} color={color} />
@@ -935,13 +935,13 @@ export default function SettingsScreen() {
           <Card style={styles.settingsSection} mode="elevated">
             <Card.Content>
               <Text variant="titleSmall" style={[styles.sectionTitle, { fontSize: fontSizes.caption }]}>
-                QUICK LINKS
+                快捷入口
               </Text>
 
               <List.Item
-                title="Favorites"
+                title="收藏"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="View your saved wallpapers and items"
+                description="查看已保存的壁纸和项目"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => (
                   <List.Icon
@@ -956,9 +956,9 @@ export default function SettingsScreen() {
               />
 
               <List.Item
-                title="Report a Bug"
+                title="问题反馈"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="Report issues or offer feedback to improve the app"
+                description="报告问题或提出建议，帮助改进应用"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => (
                   <List.Icon
@@ -976,12 +976,12 @@ export default function SettingsScreen() {
 
           <Card style={styles.settingsSection} mode="elevated">
             <Card.Content>
-              <Text variant="titleSmall" style={[styles.sectionTitle, { fontSize: fontSizes.caption }]}>SHARING</Text>
+               <Text variant="titleSmall" style={[styles.sectionTitle, { fontSize: fontSizes.caption }]}>共享</Text>
 
               <List.Item
-                title="Share to PC"
+                title="分享到电脑"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="Share wallpapers to your computer"
+                description="将壁纸分享到您的电脑"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => <List.Icon {...props} icon={({ size, color }) => (
                   <Share variant="Broken" size={size} color={color} />
@@ -989,9 +989,9 @@ export default function SettingsScreen() {
                 onPress={() => {
                   // This will be implemented later
                   if (Platform.OS === 'android') {
-                    ToastAndroid.show('Feature coming soon', ToastAndroid.SHORT);
+                    ToastAndroid.show('功能即将上线', ToastAndroid.SHORT);
                   } else {
-                    Alert.alert('Coming Soon', 'This feature will be available in a future update');
+                    Alert.alert('敬请期待', '该功能将在后续版本中提供');
                   }
                 }}
               />
@@ -1000,12 +1000,12 @@ export default function SettingsScreen() {
 
           <Card style={styles.settingsSection2} mode="elevated">
             <Card.Content>
-              <Text variant="titleSmall" style={[styles.sectionTitle, { fontSize: fontSizes.caption }]}>ABOUT</Text>
+              <Text variant="titleSmall" style={[styles.sectionTitle, { fontSize: fontSizes.caption }]}>关于</Text>
 
               <List.Item
-                title="About Shiori"
+                title="关于 Shiori"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="Version 1.1.0"
+                description="版本 1.1.0"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => <List.Icon {...props} icon={({ size, color }) => (
                   <InfoCircle variant="Broken" size={size} color={color} />
@@ -1014,9 +1014,9 @@ export default function SettingsScreen() {
               />
 
               <List.Item
-                title="Rate the App"
+                title="给应用评分"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="Enjoying Shiori? Let us know!"
+                description="喜欢 Shiori 吗？告诉我们吧！"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => <List.Icon {...props} icon={({ size, color }) => (
                   <Star variant="Broken" size={size} color={color} />
@@ -1024,9 +1024,9 @@ export default function SettingsScreen() {
                 onPress={showRateApp}
               />
               <List.Item
-                title="Contact Us"
+                title="联系我们"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="Send feedback or report issues"
+                description="发送反馈或报告问题"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => <List.Icon {...props} icon={({ size, color }) => (
                   <Message variant="Broken" size={size} color={color} />
@@ -1034,9 +1034,9 @@ export default function SettingsScreen() {
                 onPress={() => router.push('/(tabs)/bug-report')}
               />
               <List.Item
-                title="Buy me a Coffee!"
+                title="买杯咖啡支持我！"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="Help fuel the code by donating any amount"
+                description="任意金额的赞助都能支持本项目"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => (
                   <List.Icon
@@ -1050,9 +1050,9 @@ export default function SettingsScreen() {
               />
 
               <List.Item
-                title="Contact Us"
+                title="联系我们"
                 titleStyle={{ fontSize: fontSizes.body }}
-                description="Send feedback or report issues"
+                description="发送反馈或报告问题"
                 descriptionStyle={{ fontSize: fontSizes.caption }}
                 left={props => <List.Icon {...props} icon={({ size, color }) => (
                   <Message variant="Broken" size={size} color={color} />
@@ -1066,17 +1066,17 @@ export default function SettingsScreen() {
 
         <Portal>
           <Dialog visible={authState.wallhavenAuthVisible} onDismiss={() => updateAuthState({ wallhavenAuthVisible: false })}>
-            <Dialog.Title style={{ fontSize: fontSizes.h3 }}>Connect to Wallhaven</Dialog.Title>
+            <Dialog.Title style={{ fontSize: fontSizes.h3 }}>连接 Wallhaven</Dialog.Title>
             <Dialog.Content>
               {authState.loading ? (
                 <View style={{ height: 120, justifyContent: 'center', alignItems: 'center' }}>
                   <ActivityIndicator size="large" color={paperTheme.colors.primary} />
-                  <Text style={{ marginTop: 16, fontSize: fontSizes.body }}>Processing login...</Text>
+                  <Text style={{ marginTop: 16, fontSize: fontSizes.body }}>正在处理登录...</Text>
                 </View>
               ) : (
                 <>
                   <Text style={{ marginBottom: 20, fontSize: fontSizes.body }}>
-                    You have two options to connect with your Wallhaven account:
+                    您有两种方式连接到 Wallhaven 账户：
                   </Text>
 
                   <Button
@@ -1088,7 +1088,7 @@ export default function SettingsScreen() {
                     style={{ marginBottom: 12 }}
                     labelStyle={{ fontSize: fontSizes.body }}
                   >
-                    Open Wallhaven Website
+                    打开 Wallhaven 网站
                   </Button>
 
                   <Button
@@ -1096,20 +1096,20 @@ export default function SettingsScreen() {
                     onPress={showManualKeyDialog}
                     labelStyle={{ fontSize: fontSizes.body }}
                   >
-                    Enter API Key Manually
+                    手动输入 API 密钥
                   </Button>
 
                   <Text style={{ marginTop: 20, opacity: 0.7, fontSize: fontSizes.caption }}>
-                    1. Sign in on the Wallhaven website{'\n'}
-                    2. Go to your Settings → Account{'\n'}
-                    3. Copy your API Key{'\n'}
-                    4. Return here and enter it manually
+                    1. 在 Wallhaven 网站登录{'\n'}
+                    2. 进入 设置 → 账户{'\n'}
+                    3. 复制您的 API 密钥{'\n'}
+                    4. 返回此处手动输入
                   </Text>
                 </>
               )}
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={() => updateAuthState({ wallhavenAuthVisible: false })} labelStyle={{ fontSize: fontSizes.body }}>Close</Button>
+              <Button onPress={() => updateAuthState({ wallhavenAuthVisible: false })} labelStyle={{ fontSize: fontSizes.body }}>关闭</Button>
             </Dialog.Actions>
           </Dialog>
 
@@ -1119,11 +1119,11 @@ export default function SettingsScreen() {
             style={{ backgroundColor: paperTheme.colors.surface }}
           >
             <Dialog.Title style={{ color: paperTheme.colors.onSurface }}>
-              Enter API Key
+              输入 API 密钥
             </Dialog.Title>
             <Dialog.Content>
               <TextInput
-                label="API Key"
+                label="API 密钥"
                 value={inputApiKey}
                 onChangeText={setInputApiKey}
                 mode="outlined"
@@ -1131,7 +1131,7 @@ export default function SettingsScreen() {
                 style={{ backgroundColor: paperTheme.colors.surface }}
               />
               <Text variant="bodySmall" style={{ marginTop: 8, color: paperTheme.colors.onSurfaceVariant }}>
-                You can find your API key in your Wallhaven account settings.
+                您可以在 Wallhaven 账户设置中找到 API 密钥。
               </Text>
             </Dialog.Content>
             <Dialog.Actions>
@@ -1139,7 +1139,7 @@ export default function SettingsScreen() {
                 onPress={() => setManualKeyDialogVisible(false)}
                 textColor={paperTheme.colors.onSurface}
               >
-                Cancel
+                取消
               </Button>
               <Button
                 onPress={handleManualApiKeySave}
@@ -1147,18 +1147,18 @@ export default function SettingsScreen() {
                 disabled={authState.loading}
                 textColor={paperTheme.colors.primary}
               >
-                Save
+                保存
               </Button>
             </Dialog.Actions>
           </Dialog>
 
           <Dialog visible={dialogStates.fontSizeVisible} onDismiss={() => updateDialogStates({ fontSizeVisible: false })}>
-            <Dialog.Title style={{ fontSize: fontSizes.h3 }}>Font Size</Dialog.Title>
+            <Dialog.Title style={{ fontSize: fontSizes.h3 }}>字号</Dialog.Title>
             <Dialog.Content>
               <RadioButton.Group onValueChange={handleFontSizeChange} value={settings.fontSize}>
                 <View style={[styles.fontSizeOption, { marginBottom: 16, alignItems: 'center', height: 48 }]}>
                   <RadioButton.Item
-                    label="Small"
+                    label="小"
                     value="small"
                     position="leading"
                     style={[styles.radioItem, { height: 48 }]}
@@ -1168,7 +1168,7 @@ export default function SettingsScreen() {
                 </View>
                 <View style={[styles.fontSizeOption, { marginBottom: 16, alignItems: 'center', height: 48 }]}>
                   <RadioButton.Item
-                    label="Medium"
+                    label="中"
                     value="medium"
                     position="leading"
                     style={[styles.radioItem, { height: 48 }]}
@@ -1178,7 +1178,7 @@ export default function SettingsScreen() {
                 </View>
                 <View style={[styles.fontSizeOption, { marginBottom: 20, alignItems: 'center', height: 48 }]}>
                   <RadioButton.Item
-                    label="Large"
+                    label="大"
                     value="large"
                     position="leading"
                     style={[styles.radioItem, { height: 48 }]}
@@ -1188,41 +1188,41 @@ export default function SettingsScreen() {
                 </View>
               </RadioButton.Group>
               <Text variant="bodySmall" style={[styles.apiKeyHelp, { marginTop: 8, paddingHorizontal: 8 }]}>
-                Font size changes apply immediately throughout the app.
+                字号调整会立即在整个应用中生效。
               </Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={() => updateDialogStates({ fontSizeVisible: false })} labelStyle={{ fontSize: fontSizes.body }}>Cancel</Button>
-              <Button onPress={() => handleFontSizeChange(settings.fontSize)} labelStyle={{ fontSize: fontSizes.body }}>Apply</Button>
+              <Button onPress={() => updateDialogStates({ fontSizeVisible: false })} labelStyle={{ fontSize: fontSizes.body }}>取消</Button>
+              <Button onPress={() => handleFontSizeChange(settings.fontSize)} labelStyle={{ fontSize: fontSizes.body }}>应用</Button>
             </Dialog.Actions>
           </Dialog>
 
           {/* Download Location Dialog */}
           <Dialog visible={dialogStates.downloadLocationVisible} onDismiss={() => updateDialogStates({ downloadLocationVisible: false })}>
-            <Dialog.Title style={{ fontSize: fontSizes.h3 }}>Download Location</Dialog.Title>
+            <Dialog.Title style={{ fontSize: fontSizes.h3 }}>下载位置</Dialog.Title>
             <Dialog.Content>
               <RadioButton.Group onValueChange={handleDownloadLocationChange} value={settings.downloadLocation}>
                 <RadioButton.Item
-                  label="Gallery (Recommended)"
+                  label="相册（推荐）"
                   value="gallery"
                   position="leading"
                   style={styles.radioItem}
                   labelStyle={{ fontSize: fontSizes.body }}
                 />
-                <Text style={[styles.radioDescription, { fontSize: fontSizes.caption }]}>Saves wallpapers to your device's gallery in a 'Shiori' album.</Text>
+                <Text style={[styles.radioDescription, { fontSize: fontSizes.caption }]}>将壁纸保存到设备相册中名为“Shiori”的文件夹。</Text>
 
                 <RadioButton.Item
-                  label="App's Private Folder"
+                  label="应用私有文件夹"
                   value="private"
                   position="leading"
                   style={styles.radioItem}
                   labelStyle={{ fontSize: fontSizes.body }}
                 />
-                <Text style={[styles.radioDescription, { fontSize: fontSizes.caption }]}>Saves wallpapers inside the app's storage. Files may not be easily accessible outside the app.</Text>
+                <Text style={[styles.radioDescription, { fontSize: fontSizes.caption }]}>将壁纸保存到应用内部存储中。这些文件在应用外可能不易访问。</Text>
               </RadioButton.Group>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={() => updateDialogStates({ downloadLocationVisible: false })} labelStyle={{ fontSize: fontSizes.body }}>Cancel</Button>
+              <Button onPress={() => updateDialogStates({ downloadLocationVisible: false })} labelStyle={{ fontSize: fontSizes.body }}>取消</Button>
             </Dialog.Actions>
           </Dialog>
 
@@ -1231,7 +1231,7 @@ export default function SettingsScreen() {
             <View style={styles.loadingOverlay}>
               <Surface style={styles.loadingContainer}>
                 <ActivityIndicator size="large" color={paperTheme.colors.primary} />
-                <Text style={[styles.loadingText, { fontSize: fontSizes.body }]}>Changing theme...</Text>
+                <Text style={[styles.loadingText, { fontSize: fontSizes.body }]}>正在切换主题…</Text>
               </Surface>
             </View>
           )}
@@ -1241,7 +1241,7 @@ export default function SettingsScreen() {
             <View style={styles.loadingOverlay}>
               <Surface style={styles.loadingContainer}>
                 <ActivityIndicator size="large" color={paperTheme.colors.primary} />
-                <Text style={[styles.loadingText, { fontSize: fontSizes.body }]}>Applying font size...</Text>
+                <Text style={[styles.loadingText, { fontSize: fontSizes.body }]}>正在应用字号…</Text>
               </Surface>
             </View>
           )}
@@ -1250,17 +1250,17 @@ export default function SettingsScreen() {
             visible={clearFavoritesDialogVisible}
             onDismiss={() => setClearFavoritesDialogVisible(false)}
           >
-            <Dialog.Title>Clear Favorites</Dialog.Title>
+            <Dialog.Title>清除收藏</Dialog.Title>
             <Dialog.Content>
-              <Text variant="bodyMedium">Are you sure you want to remove all your favorite wallpapers? This action cannot be undone.</Text>
+              <Text variant="bodyMedium">确定要移除所有已收藏的壁纸吗？此操作不可撤销。</Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={() => setClearFavoritesDialogVisible(false)}>Cancel</Button>
+              <Button onPress={() => setClearFavoritesDialogVisible(false)}>取消</Button>
               <Button
                 onPress={handleClearFavorites}
                 textColor={paperTheme.colors.error}
               >
-                Clear
+                清除
               </Button>
             </Dialog.Actions>
           </Dialog>
@@ -1271,20 +1271,20 @@ export default function SettingsScreen() {
             style={{ backgroundColor: paperTheme.colors.surface }}
           >
             <Dialog.Title style={{ textAlign: 'center', color: paperTheme.colors.onSurface }}>
-              About Shiori
+              关于 Shiori
             </Dialog.Title>
             <Dialog.Content>
               <View style={{ alignItems: 'center', paddingVertical: 8 }}>
                 <Text variant="titleMedium" style={{ color: paperTheme.colors.onSurface, marginBottom: 4 }}>
-                  Version 1.1.0
+                  版本 1.1.0
                 </Text>
                 <Text variant="bodyMedium" style={{ color: paperTheme.colors.onSurfaceVariant, textAlign: 'center', marginBottom: 16 }}>
-                  A beautiful wallpaper browser app using the Wallhaven API.
+                  一款使用 Wallhaven API 的精美壁纸浏览应用。
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
                   <Star variant="Broken" size={20} color={paperTheme.colors.onSurfaceVariant} />
                   <Text variant="bodyMedium" style={{ color: paperTheme.colors.onSurfaceVariant, marginLeft: 8 }}>
-                    Open Source on GitHub
+                    开源项目，托管于 GitHub
                   </Text>
                 </View>
               </View>
@@ -1295,7 +1295,7 @@ export default function SettingsScreen() {
                 onPress={() => setAboutDialogVisible(false)}
                 style={{ minWidth: 100 }}
               >
-                Close
+                关闭
               </Button>
             </Dialog.Actions>
           </Dialog>
@@ -1304,13 +1304,13 @@ export default function SettingsScreen() {
             visible={contactDialogVisible}
             onDismiss={() => setContactDialogVisible(false)}
           >
-            <Dialog.Title style={{ textAlign: 'center' }}>Contact Us</Dialog.Title>
+            <Dialog.Title style={{ textAlign: 'center' }}>联系我们</Dialog.Title>
             <Dialog.Content>
               <Text variant="bodyMedium" style={{ textAlign: 'center' }}>
-                Have feedback or found an issue?
+                有建议或发现了问题？
               </Text>
               <Text variant="bodyMedium" style={{ textAlign: 'center', marginTop: 8 }}>
-                We'd love to hear from you! Please send your feedback or report issues to:
+                我们很乐意听到你的声音！请将反馈或问题报告发送至：
               </Text>
               <Text
                 variant="bodyMedium"
@@ -1329,7 +1329,7 @@ export default function SettingsScreen() {
                 onPress={() => setContactDialogVisible(false)}
                 style={{ minWidth: 100 }}
               >
-                Close
+                关闭
               </Button>
             </Dialog.Actions>
           </Dialog>
@@ -1338,13 +1338,13 @@ export default function SettingsScreen() {
             visible={rateAppDialogVisible}
             onDismiss={() => setRateAppDialogVisible(false)}
           >
-            <Dialog.Title style={{ textAlign: 'center' }}>Rate Shiori</Dialog.Title>
+            <Dialog.Title style={{ textAlign: 'center' }}>为 Shiori 评分</Dialog.Title>
             <Dialog.Content>
               <Text variant="bodyMedium" style={{ textAlign: 'center' }}>
-                Enjoying Shiori?
+                喜欢 Shiori 吗？
               </Text>
               <Text variant="bodyMedium" style={{ textAlign: 'center', marginTop: 8 }}>
-                Show your support by starring the project on GitHub!
+                在 GitHub 上为项目点个 Star 来支持我们吧！
               </Text>
             </Dialog.Content>
             <Dialog.Actions style={{ justifyContent: 'center' }}>
@@ -1352,7 +1352,7 @@ export default function SettingsScreen() {
                 onPress={() => setRateAppDialogVisible(false)}
                 style={{ minWidth: 100 }}
               >
-                Cancel
+                取消
               </Button>
               <Button
                 onPress={() => {
@@ -1361,7 +1361,7 @@ export default function SettingsScreen() {
                 }}
                 style={{ minWidth: 100 }}
               >
-                Star on GitHub
+                去 GitHub 加星
               </Button>
             </Dialog.Actions>
           </Dialog>

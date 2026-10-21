@@ -87,11 +87,11 @@ function TabBar() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: '首页',
           tabBarIcon: ({ color, focused }) => (
             <View style={[styles.tabItem, focused && [styles.activeTabPill, { backgroundColor: getActivePillColor() }]]}>
               <Home size={20} color={color} variant={focused ? 'Bold' : 'Broken'} />
-              {focused && <Text style={[styles.tabLabel, { color }]}>Home</Text>}
+              {focused && <Text style={[styles.tabLabel, { color }]}>首页</Text>}
             </View>
           ),
         }}
@@ -99,11 +99,11 @@ function TabBar() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
+          title: '发现',
           tabBarIcon: ({ color, focused }) => (
             <View style={[styles.tabItem, focused && [styles.activeTabPill, { backgroundColor: getActivePillColor() }]]}>
               <LocationDiscover size={20} color={color} variant={focused ? 'Bold' : 'Broken'} />
-              {focused && <Text style={[styles.tabLabel, { color }]}>Explore</Text>}
+              {focused && <Text style={[styles.tabLabel, { color }]}>发现</Text>}
             </View>
           ),
         }}
@@ -111,11 +111,11 @@ function TabBar() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: 'Settings',
+          title: '设置',
           tabBarIcon: ({ color, focused }) => (
             <View style={[styles.tabItem, focused && [styles.activeTabPill, { backgroundColor: getActivePillColor() }]]}>
               <Setting size={20} color={color} variant={focused ? 'Bold' : 'Broken'} />
-              {focused && <Text style={[styles.tabLabel, { color }]}>Settings</Text>}
+              {focused && <Text style={[styles.tabLabel, { color }]}>设置</Text>}
             </View>
           ),
         }}

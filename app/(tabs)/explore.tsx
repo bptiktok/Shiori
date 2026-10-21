@@ -140,17 +140,17 @@ export default function ExploreScreen() {
   }, []);
 
   const sortOptions = [
-    { id: 'date_added', label: 'Latest' },
-    { id: 'relevance', label: 'Relevance' },
-    { id: 'random', label: 'Random' },
-    { id: 'views', label: 'Views' },
-    { id: 'favorites', label: 'Favorites' },
-    { id: 'toplist', label: 'Toplist' },
+    { id: 'date_added', label: '最新' },
+    { id: 'relevance', label: '相关度' },
+    { id: 'random', label: '随机' },
+    { id: 'views', label: '浏览量' },
+    { id: 'favorites', label: '收藏数' },
+    { id: 'toplist', label: '排行榜' },
   ];
 
   const orderOptions = [
-    { id: 'desc', label: 'Descending' },
-    { id: 'asc', label: 'Ascending' },
+    { id: 'desc', label: '降序' },
+    { id: 'asc', label: '升序' },
   ];
 
   const calculateItemHeight = (resolution: string): number => {
@@ -227,7 +227,7 @@ export default function ExploreScreen() {
         setHasMore(response.data.length > 0);
       } catch (error: any) {
         console.error('Error loading wallpapers:', error);
-        setErrorMessage(error?.message || 'Unable to load wallpapers. Please check your connection.');
+        setErrorMessage(error?.message || '无法加载壁纸，请检查网络连接。');
         setWallpapers([]);
       } finally {
         setLoading(false);
@@ -337,7 +337,7 @@ export default function ExploreScreen() {
         <StatusBar style="auto" />
         <Stack.Screen
           options={{
-            title: 'Explore',
+            title: '发现',
             headerShadowVisible: false,
           }}
         />
@@ -346,7 +346,7 @@ export default function ExploreScreen() {
           <View style={styles.searchContainer}>
             <SearchNormal1 size={20} color={theme.colors.primary} variant="Broken" style={styles.searchIcon} />
             <Searchbar
-              placeholder="Search wallpapers..."
+              placeholder="搜索壁纸..."
               onChangeText={setSearchQuery}
               value={searchQuery}
               style={styles.searchBar}
@@ -362,7 +362,7 @@ export default function ExploreScreen() {
               <View style={styles.filterHeader}>
                 <Filter size={18} color={theme.colors.primary} variant="Broken" />
                 <Text style={[styles.filterTitle, { fontFamily: 'Nunito-Bold', fontSize: FontSizes.body }]}>
-                  Filters
+                  筛选
                 </Text>
                 <View style={styles.filterExpandIcon}>
                   {filtersExpanded ? (
@@ -379,7 +379,7 @@ export default function ExploreScreen() {
                 <View style={styles.subFilterHeader}>
                   <Sort size={16} color={theme.colors.onSurface} variant="Broken" />
                   <Text style={[styles.subFilterTitle, { fontFamily: 'Nunito-SemiBold', fontSize: FontSizes.bodySmall }]}>
-                    Sort by
+                    排序方式
                   </Text>
                 </View>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.sortScroll}>
@@ -410,7 +410,7 @@ export default function ExploreScreen() {
                 <View style={styles.subFilterHeader}>
                   <ArrowUp2 size={16} color={theme.colors.onSurface} variant="Broken" />
                   <Text style={[styles.subFilterTitle, { fontFamily: 'Nunito-SemiBold', fontSize: FontSizes.bodySmall }]}>
-                    Order
+                    顺序
                   </Text>
                 </View>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.orderScroll}>
@@ -454,14 +454,14 @@ export default function ExploreScreen() {
               <View style={styles.emptyContainer}>
                 <SearchNormal1 size={52} color={theme.colors.primary} variant="Broken" style={styles.emptyIcon} />
                 <Text style={[styles.emptyTitle, { color: theme.colors.onSurface, fontFamily: 'Nunito-Bold' }]}>
-                  {errorMessage ? 'Connection Error' : 'No Wallpapers Found'}
+                  {errorMessage ? '连接错误' : '未找到壁纸'}
                 </Text>
                 <Text style={[styles.emptySubtitle, { color: theme.colors.onSurfaceVariant, fontFamily: 'Nunito-Medium' }]}>
                   {errorMessage
                     ? errorMessage
                     : searchQuery
-                    ? `No results match "${searchQuery}". Try using different terms or resetting filters.`
-                    : 'No wallpapers were found for the selected category or filters.'}
+                    ? `没有与 "${searchQuery}" 匹配的结果，请换个关键词或重置筛选条件。`
+                    : '当前分类或筛选条件下没有找到壁纸。'}
                 </Text>
 
                 {searchQuery.length > 0 && (
@@ -470,7 +470,7 @@ export default function ExploreScreen() {
                     onPress={() => setSearchQuery('')}
                   >
                     <Text style={[styles.clearSearchText, { color: theme.colors.primary, fontFamily: 'Nunito-Bold' }]}>
-                      Clear Search
+                      清除搜索
                     </Text>
                   </TouchableOpacity>
                 )}
@@ -496,7 +496,7 @@ export default function ExploreScreen() {
                         >
                           <ArrowLeft2 size={20} color={theme.colors.primary} variant="Broken" />
                           <Text style={[styles.paginationText, { color: theme.colors.primary, fontFamily: 'Nunito-Bold', fontSize: FontSizes.body }]}>
-                            Previous
+                            上一页
                           </Text>
                         </TouchableOpacity>
                       )}
@@ -511,7 +511,7 @@ export default function ExploreScreen() {
                         ) : (
                           <>
                             <Text style={[styles.paginationText, { color: theme.colors.primary, fontFamily: 'Nunito-Bold', fontSize: FontSizes.body }]}>
-                              Next
+                              下一页
                             </Text>
                             <ArrowRight2 size={20} color={theme.colors.primary} variant="Broken" />
                           </>

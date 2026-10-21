@@ -170,7 +170,7 @@ export default function FavoritesScreen() {
           
           <FAB
             icon={({ size, color }) => <ArrowDown2 size={size} color={color} variant="Broken" />}
-            label="Download"
+            label="下载"
             style={styles.downloadButton}
             onPress={handleDownload}
           />
@@ -185,7 +185,7 @@ export default function FavoritesScreen() {
         <StatusBar style="auto" />
         <Stack.Screen
           options={{
-            title: 'Favorites',
+            title: '收藏',
             headerShadowVisible: false,
             headerTitleStyle: {
               fontFamily: 'Nunito-Bold',
@@ -198,10 +198,10 @@ export default function FavoritesScreen() {
           <View style={styles.emptyContainer}>
             <Heart size={64} color={theme.colors.primary} variant="Broken" />
             <Text style={[styles.emptyText, { fontFamily: 'Nunito-Bold', fontSize: FontSizes.h4 }]}>
-              No favorites yet
+              还没有收藏
             </Text>
             <Text style={[styles.emptySubtext, { fontFamily: 'Nunito-Regular', fontSize: FontSizes.body }]}>
-              Start adding wallpapers to your favorites
+              开始把壁纸添加到收藏吧
             </Text>
             <Button
               mode="contained"
@@ -209,7 +209,7 @@ export default function FavoritesScreen() {
               style={styles.exploreButton}
               labelStyle={{ fontFamily: 'Nunito-Bold', fontSize: FontSizes.button }}
             >
-              Explore Wallpapers
+              浏览壁纸
             </Button>
           </View>
         ) : loading ? (
@@ -226,10 +226,10 @@ export default function FavoritesScreen() {
                 />
                 <View style={styles.headerCol}>
                   <Text style={[styles.appTitle, { fontFamily: 'Nunito-Bold', fontSize: FontSizes.h4 }]}>
-                    Favorites <Text style={[styles.subtitle, { fontFamily: 'Nunito-Regular', fontSize: FontSizes.body }]}>v1.0.0</Text>
+                    收藏 <Text style={[styles.subtitle, { fontFamily: 'Nunito-Regular', fontSize: FontSizes.body }]}>v1.0.0</Text>
                   </Text>
                   <Text style={[styles.subtitle, { fontFamily: 'Nunito-Regular', fontSize: FontSizes.bodySmall }]}>
-                    {favorites.length} {favorites.length === 1 ? 'wallpaper' : 'wallpapers'} saved
+                    已收藏 {favorites.length} 张壁纸
                   </Text>
                 </View>
               </View>

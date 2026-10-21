@@ -44,18 +44,18 @@ const GITHUB_ISSUES = 'https://github.com/brianali-codes/shiori/issues';
 const MAX_DESCRIPTION_LENGTH = 1000;
 
 const BUG_CATEGORIES = [
-  { id: 'crash', label: 'App Crash', icon: Warning2 },
-  { id: 'ui', label: 'UI Issue', icon: Star1 },
-  { id: 'feature', label: 'Feature Bug', icon: Message },
-  { id: 'performance', label: 'Performance', icon: Clock },
-  { id: 'other', label: 'Other', icon: InfoCircle },
+  { id: 'crash', label: '应用崩溃', icon: Warning2 },
+  { id: 'ui', label: '界面问题', icon: Star1 },
+  { id: 'feature', label: '功能异常', icon: Message },
+  { id: 'performance', label: '性能问题', icon: Clock },
+  { id: 'other', label: '其他', icon: InfoCircle },
 ];
 
 const PRIORITY_LEVELS = [
-  { id: 'low', label: 'Low', color: '#10B981' },
-  { id: 'medium', label: 'Medium', color: '#F59E0B' },
-  { id: 'high', label: 'High', color: '#F97316' },
-  { id: 'critical', label: 'Critical', color: '#EF4444' },
+  { id: 'low', label: '低', color: '#10B981' },
+  { id: 'medium', label: '中', color: '#F59E0B' },
+  { id: 'high', label: '高', color: '#F97316' },
+  { id: 'critical', label: '紧急', color: '#EF4444' },
 ];
 
 export default function BugReportScreen() {
@@ -85,20 +85,20 @@ export default function BugReportScreen() {
     if (Platform.OS === 'android') {
       ToastAndroid.show(message, ToastAndroid.SHORT);
     } else {
-      Alert.alert('Info', message);
+      Alert.alert('提示', message);
     }
   };
 
   const handleCopyEmail = async () => {
     await ExpoClipboard.setStringAsync(EMAIL_ADDRESS);
-    showToast('Email address copied to clipboard');
+    showToast('邮箱地址已复制到剪贴板');
   };
 
   const handleCopyDeviceInfo = async () => {
-    const deviceInfoText = `App Version: ${appVersion}\nDevice: ${deviceInfo}\nPlatform: ${Platform.OS} ${Platform.Version}`;
+    const deviceInfoText = `应用版本：${appVersion}\n设备：${deviceInfo}\n平台：${Platform.OS} ${Platform.Version}`;
     await ExpoClipboard.setStringAsync(deviceInfoText);
     setIsCopied(true);
-    showToast('Device info copied to clipboard');
+    showToast('设备信息已复制到剪贴板');
     setTimeout(() => setIsCopied(false), 2000);
   };
 
@@ -110,7 +110,7 @@ export default function BugReportScreen() {
         await Linking.openURL(GITHUB_ISSUES);
       }
     } catch (error) {
-      showToast('Could not open GitHub issues page');
+      showToast('无法打开 GitHub issues 页面');
     } finally {
       setIsOpeningGitHub(false);
     }
@@ -128,7 +128,7 @@ export default function BugReportScreen() {
 
   const handleSubmit = () => {
     if (!title || !description || !selectedCategory) {
-      showToast('Please fill out all required fields');
+      showToast('请填写所有必填项');
       return;
     }
 
@@ -137,17 +137,17 @@ export default function BugReportScreen() {
     setTimeout(() => {
       setIsSubmitting(false);
       Alert.alert(
-        'Report Sent',
-        'Thank you for helping us improve Shiori! Your bug report has been received.',
+        '反馈已发送',
+        '感谢您帮助我们改进 Shiori！我们已收到您的反馈。',
         [
-          { text: 'Submit Another', onPress: resetForm },
-          { text: 'Done', style: 'cancel' },
+          { text: '再提交一条', onPress: resetForm },
+          { text: '完成', style: 'cancel' },
         ]
       );
     }, 1200);
   };
 
-  const appVersion = Constants.expoConfig?.version || 'Unknown';
+  const appVersion = Constants.expoConfig?.version || '未知';
   const deviceInfo = `${Platform.OS} ${Platform.Version}`;
 
   return (
@@ -155,7 +155,7 @@ export default function BugReportScreen() {
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <Stack.Screen
           options={{
-            title: 'Report a Bug',
+            title: '问题反馈',
             headerTitleStyle: {
               fontFamily: 'Nunito-Bold',
               fontSize: FontSizes.h3,
@@ -179,10 +179,10 @@ export default function BugReportScreen() {
             </View>
             <View style={styles.heroTextContainer}>
               <Text style={[styles.heroTitle, { color: theme.colors.onSurface }]}>
-                Found an Issue?
+                发现问题了？
               </Text>
               <Text style={[styles.heroSubtitle, { color: theme.colors.onSurfaceVariant }]}>
-                Help us squash bugs by providing detailed feedback below.
+                请在下方提供详细信息，帮助我们修复问题。
               </Text>
             </View>
           </Surface>
@@ -191,7 +191,7 @@ export default function BugReportScreen() {
           <Surface style={[styles.card, { backgroundColor: cardBackground, borderColor }]} elevation={0}>
             {/* Category Grid */}
             <Text style={[styles.inputLabel, { color: theme.colors.onSurface }]}>
-              Category <Text style={{ color: theme.colors.error }}>*</Text>
+              类别 <Text style={{ color: theme.colors.error }}>*</Text>
             </Text>
             <View style={styles.categoryGrid}>
               {BUG_CATEGORIES.map((category) => {
@@ -238,7 +238,7 @@ export default function BugReportScreen() {
             </View>
 
             {/* Priority Selection Bar */}
-            <Text style={[styles.inputLabel, { color: theme.colors.onSurface }]}>Priority Level</Text>
+            <Text style={[styles.inputLabel, { color: theme.colors.onSurface }]}>优先级</Text>
             <View style={[styles.prioritySegmentContainer, { borderColor, backgroundColor: isDark || isAmoled ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)' }]}>
               {PRIORITY_LEVELS.map((priority) => {
                 const isSelected = selectedPriority === priority.id;
@@ -280,18 +280,18 @@ export default function BugReportScreen() {
             {/* Input Fields */}
             <View style={styles.formFields}>
               <TextInput
-                label="Bug Title *"
+                label="问题标题 *"
                 value={title}
                 onChangeText={setTitle}
                 mode="outlined"
                 outlineStyle={styles.inputOutline}
                 style={styles.input}
-                placeholder="e.g. Wallpapers not loading on Wi-Fi"
+                placeholder="例如：连接 Wi-Fi 时壁纸无法加载"
               />
 
               <View>
                 <TextInput
-                  label="What happened? *"
+                  label="发生了什么？ *"
                   value={description}
                   onChangeText={setDescription}
                   mode="outlined"
@@ -300,7 +300,7 @@ export default function BugReportScreen() {
                   maxLength={MAX_DESCRIPTION_LENGTH}
                   outlineStyle={styles.inputOutline}
                   style={styles.input}
-                  placeholder="Describe what went wrong in detail..."
+                  placeholder="请详细描述出现的问题……"
                 />
                 <Text style={[styles.charCount, { color: theme.colors.outline }]}>
                   {description.length}/{MAX_DESCRIPTION_LENGTH}
@@ -308,7 +308,7 @@ export default function BugReportScreen() {
               </View>
 
               <TextInput
-                label="Steps to Reproduce (optional)"
+                label="复现步骤（可选）"
                 value={stepsToReproduce}
                 onChangeText={setStepsToReproduce}
                 mode="outlined"
@@ -316,11 +316,11 @@ export default function BugReportScreen() {
                 numberOfLines={3}
                 outlineStyle={styles.inputOutline}
                 style={styles.input}
-                placeholder="1. Go to Explore tab&#10;2. Tap on 4K filter"
+                placeholder="1. 打开“发现”页面&#10;2. 点击 4K 筛选"
               />
 
               <TextInput
-                label="Expected Behavior (optional)"
+                label="预期行为（可选）"
                 value={expectedBehavior}
                 onChangeText={setExpectedBehavior}
                 mode="outlined"
@@ -328,17 +328,17 @@ export default function BugReportScreen() {
                 numberOfLines={2}
                 outlineStyle={styles.inputOutline}
                 style={styles.input}
-                placeholder="What did you expect to happen?"
+                placeholder="您期望发生什么？"
               />
 
               <TextInput
-                label="Your Email (optional)"
+                label="您的邮箱（可选）"
                 value={email}
                 onChangeText={setEmail}
                 mode="outlined"
                 outlineStyle={styles.inputOutline}
                 style={styles.input}
-                placeholder="For follow-up updates"
+                placeholder="用于接收后续进展"
                 keyboardType="email-address"
               />
             </View>
@@ -355,14 +355,14 @@ export default function BugReportScreen() {
                 <Send2 size={size} color={color} variant="Bold" />
               )}
             >
-              Submit Bug Report
+              提交反馈
             </Button>
           </Surface>
 
           {/* Alternative Contact Section */}
           <Surface style={[styles.card, { backgroundColor: cardBackground, borderColor }]} elevation={0}>
             <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
-              Alternative Reporting
+              其他反馈方式
             </Text>
 
             <TouchableOpacity style={styles.contactRow} onPress={handleCopyEmail} activeOpacity={0.7}>
@@ -370,7 +370,7 @@ export default function BugReportScreen() {
                 <Message size={18} color={theme.colors.primary} variant="Bold" />
               </View>
               <View style={styles.contactTextContainer}>
-                <Text style={[styles.contactTitle, { color: theme.colors.onSurface }]}>Direct Email</Text>
+                <Text style={[styles.contactTitle, { color: theme.colors.onSurface }]}>直接发送邮件</Text>
                 <Text style={[styles.contactSubtitle, { color: theme.colors.onSurfaceVariant }]}>{EMAIL_ADDRESS}</Text>
               </View>
               <Copy size={18} color={theme.colors.outline} />
@@ -381,8 +381,8 @@ export default function BugReportScreen() {
                 <Document size={18} color={theme.colors.primary} variant="Bold" />
               </View>
               <View style={styles.contactTextContainer}>
-                <Text style={[styles.contactTitle, { color: theme.colors.onSurface }]}>GitHub Issues</Text>
-                <Text style={[styles.contactSubtitle, { color: theme.colors.onSurfaceVariant }]}>Submit directly to repo</Text>
+                <Text style={[styles.contactTitle, { color: theme.colors.onSurface }]}>GitHub 议题</Text>
+                <Text style={[styles.contactSubtitle, { color: theme.colors.onSurfaceVariant }]}>直接提交到代码仓库</Text>
               </View>
               {isOpeningGitHub ? (
                 <ActivityIndicator size={18} color={theme.colors.primary} />
@@ -396,7 +396,7 @@ export default function BugReportScreen() {
           <Surface style={[styles.card, { backgroundColor: cardBackground, borderColor }]} elevation={0}>
             <View style={styles.deviceHeader}>
               <Text style={[styles.sectionTitle, { color: theme.colors.onSurface, marginBottom: 0 }]}>
-                Diagnostic Context
+                诊断信息
               </Text>
               <TouchableOpacity onPress={handleCopyDeviceInfo} style={styles.copyBadgeBtn} activeOpacity={0.7}>
                 {isCopied ? (
@@ -405,7 +405,7 @@ export default function BugReportScreen() {
                   <Copy size={16} color={theme.colors.primary} />
                 )}
                 <Text style={[styles.copyBadgeText, { color: theme.colors.primary }]}>
-                  {isCopied ? 'Copied' : 'Copy'}
+                  {isCopied ? '已复制' : '复制'}
                 </Text>
               </TouchableOpacity>
             </View>
@@ -413,7 +413,7 @@ export default function BugReportScreen() {
             <View style={styles.badgeRow}>
               <View style={[styles.infoBadge, { borderColor, backgroundColor: isDark || isAmoled ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)' }]}>
                 <Text style={[styles.infoBadgeText, { color: theme.colors.onSurfaceVariant }]}>
-                  App v{appVersion}
+                  应用 v{appVersion}
                 </Text>
               </View>
               <View style={[styles.infoBadge, { borderColor, backgroundColor: isDark || isAmoled ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)' }]}>

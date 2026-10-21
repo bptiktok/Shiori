@@ -44,10 +44,10 @@ const GRID_CARD_WIDTH = (width - 44) / 2;
 const GRID_CARD_HEIGHT = GRID_CARD_WIDTH * 1.55;
 
 const categories = [
-  { id: 'all', label: 'All' },
-  { id: 'general', label: 'General' },
-  { id: 'anime', label: 'Anime' },
-  { id: 'people', label: 'People' },
+  { id: 'all', label: '全部' },
+  { id: 'general', label: '综合' },
+  { id: 'anime', label: '动漫' },
+  { id: 'people', label: '人物' },
 ];
 
 interface FeaturedItem extends WallpaperPreview {
@@ -436,7 +436,7 @@ export default function HomeScreen() {
 
             <View style={styles.headerTextCol}>
               <Text style={[styles.appTitle, { color: paperTheme.colors.onSurface }]}>
-                Shiori Wallpapers
+                Shiori 壁纸
               </Text>
 
               <View
@@ -450,7 +450,7 @@ export default function HomeScreen() {
               >
                 <Star1 size={10} color={paperTheme.colors.primary} variant="Bold" />
                 <Text style={[styles.subtitleBadgeText, { color: dynamicSubtextColor }]}>
-                  Curated Aesthetics
+                  精选美学
                 </Text>
               </View>
             </View>
@@ -510,13 +510,13 @@ export default function HomeScreen() {
               onStartShouldSetResponder={() => true}
             >
               <Text style={[styles.modalTitle, { color: paperTheme.colors.onSurface }]}>
-                Choose Theme
+                选择主题
               </Text>
 
               {[
-                { id: 'dark', label: 'Dark' },
-                { id: 'light', label: 'Light' },
-                { id: 'amoled', label: 'AMOLED' },
+                { id: 'dark', label: '深色' },
+                { id: 'light', label: '浅色' },
+                { id: 'amoled', label: '纯黑（AMOLED）' },
               ].map((item) => {
                 const isSelected = theme === item.id;
                 return (
@@ -618,7 +618,7 @@ export default function HomeScreen() {
               <View style={styles.titleRow}>
                 <Star size={18} color={paperTheme.colors.primary} variant="Bold" />
                 <Text style={[styles.sectionTitle, { color: paperTheme.colors.onSurface }]}>
-                  Featured Showcase
+                  精选展示
                 </Text>
               </View>
               <TouchableOpacity
@@ -679,7 +679,7 @@ export default function HomeScreen() {
               <View style={styles.titleRow}>
                 <Flash size={18} color={paperTheme.colors.primary} variant="Bold" />
                 <Text style={[styles.sectionTitle, { color: paperTheme.colors.onSurface }]}>
-                  Fresh Drops
+                  最新上传
                 </Text>
               </View>
               <TouchableOpacity
@@ -710,7 +710,7 @@ export default function HomeScreen() {
               <View style={styles.titleRow}>
                 <Heart size={18} color={paperTheme.colors.primary} variant="Bold" />
                 <Text style={[styles.sectionTitle, { color: paperTheme.colors.onSurface }]}>
-                  Top Rated
+                  热门推荐
                 </Text>
               </View>
               <TouchableOpacity
@@ -741,7 +741,7 @@ export default function HomeScreen() {
               <View style={styles.titleRow}>
                 <Category size={18} color={paperTheme.colors.primary} variant="Bold" />
                 <Text style={[styles.sectionTitle, { color: paperTheme.colors.onSurface }]}>
-                  Discover More
+                  发现更多
                 </Text>
               </View>
             </View>
@@ -787,7 +787,7 @@ export default function HomeScreen() {
                 ]}
               >
                 <Text style={[styles.loadMoreText, { color: paperTheme.colors.onSurface }]}>
-                  {loadingMore ? 'Loading...' : 'Load More Wallpapers'}
+                  {loadingMore ? '加载中...' : '加载更多壁纸'}
                 </Text>
               </TouchableOpacity>
             )}
