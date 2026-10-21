@@ -141,13 +141,13 @@ export default function WallpaperScreen() {
         favoritesList = favoritesList.filter((item) => String(item.id) !== String(wallpaper.id));
         setIsFavorite(false);
         if (Platform.OS === 'android') {
-          ToastAndroid.show('Removed from Favorites', ToastAndroid.SHORT);
+          ToastAndroid.show('已从收藏中移除', ToastAndroid.SHORT);
         }
       } else {
         favoritesList.push(wallpaper);
         setIsFavorite(true);
         if (Platform.OS === 'android') {
-          ToastAndroid.show('Saved to Favorites', ToastAndroid.SHORT);
+          ToastAndroid.show('已加入收藏', ToastAndroid.SHORT);
         }
       }
 
@@ -165,7 +165,7 @@ export default function WallpaperScreen() {
       try {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         await RNShare.share({
-          message: `Check out this wallpaper on Shiori: ${
+          message: `在 Shiori 上看看这张壁纸：${
             wallpaper.short_url || wallpaper.url
           }`,
           url: wallpaper.url,
@@ -265,8 +265,8 @@ export default function WallpaperScreen() {
 
       if (!permission.granted) {
         Alert.alert(
-          'Permission Required',
-          'Shiori needs media library permissions to save wallpapers.'
+          '需要权限',
+          'Shiori 需要访问媒体库的权限才能保存壁纸。'
         );
         throw new Error('Media library permission denied');
       }
@@ -300,7 +300,7 @@ export default function WallpaperScreen() {
     setIsDownloadingModalVisible(false);
     setDownloadProgress(0);
     if (Platform.OS === 'android') {
-      ToastAndroid.show('Download canceled', ToastAndroid.SHORT);
+      ToastAndroid.show('下载已取消', ToastAndroid.SHORT);
     }
   };
 
@@ -317,9 +317,9 @@ export default function WallpaperScreen() {
       const netInfo = await NetInfo.fetch();
       if (netInfo.type !== 'wifi') {
         if (Platform.OS === 'android') {
-          ToastAndroid.show('Please connect to WiFi to download', ToastAndroid.SHORT);
+          ToastAndroid.show('请连接 WiFi 后下载', ToastAndroid.SHORT);
         } else {
-          Alert.alert('WiFi Required', 'Please connect to WiFi to download wallpapers');
+          Alert.alert('需要 WiFi', '请连接 WiFi 后再下载壁纸');
         }
         return;
       }
@@ -344,9 +344,9 @@ export default function WallpaperScreen() {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
         if (Platform.OS === 'android') {
-          ToastAndroid.show('Wallpaper saved to gallery', ToastAndroid.SHORT);
+          ToastAndroid.show('壁纸已保存到相册', ToastAndroid.SHORT);
         } else {
-          Alert.alert('Success', 'Wallpaper saved to your gallery in "Shiori" album.');
+          Alert.alert('成功', '壁纸已保存到相册中的“Shiori”文件夹。');
         }
       }
     } catch (error: any) {
@@ -359,7 +359,7 @@ export default function WallpaperScreen() {
       console.error('Download error:', error);
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
 
-      setDownloadError(`Failed to download: ${error.message || 'Unknown error'}`);
+      setDownloadError(`下载失败：${error.message || '未知错误'}`);
       setShowFallbackDialog(true);
     } finally {
       setDownloading(false);
@@ -374,7 +374,7 @@ export default function WallpaperScreen() {
     setApplyingLoading(true);
 
     if (Platform.OS === 'android') {
-      ToastAndroid.show('Preparing wallpaper...', ToastAndroid.SHORT);
+      ToastAndroid.show('正在准备壁纸…', ToastAndroid.SHORT);
     }
 
     try {
@@ -394,16 +394,16 @@ export default function WallpaperScreen() {
         });
       } else {
         Alert.alert(
-          'Set Wallpaper',
-          'On iOS, please download the image and set it as wallpaper via your Photos app.'
+          '设置壁纸',
+          '在 iOS 上，请先下载图片，然后通过“照片”应用将其设为壁纸。'
         );
       }
     } catch (error: any) {
       console.error('Apply wallpaper error:', error);
       if (Platform.OS === 'android') {
-        ToastAndroid.show('Failed to launch wallpaper application', ToastAndroid.SHORT);
+        ToastAndroid.show('无法启动壁纸设置应用', ToastAndroid.SHORT);
       } else {
-        Alert.alert('Error', 'Failed to prepare wallpaper image.');
+        Alert.alert('错误', '准备壁纸图片失败。');
       }
     } finally {
       setApplyingLoading(false);
@@ -453,7 +453,7 @@ export default function WallpaperScreen() {
       {loading ? (
         <View style={styles.centerContainer}>
           <ActivityIndicator size="large" color={paperTheme.colors.primary} />
-          <Text style={styles.loadingText}>Loading wallpaper details...</Text>
+          <Text style={styles.loadingText}>正在加载壁纸详情…</Text>
         </View>
       ) : wallpaper && previewImageSource ? (
         <>
@@ -489,10 +489,10 @@ export default function WallpaperScreen() {
                   <View style={styles.statBox}>
                     <Maximize4 size={20} color={paperTheme.colors.primary} />
                     <Text variant="titleMedium" style={styles.statValue}>
-                      {wallpaper.resolution || 'N/A'}
+                      {wallpaper.resolution || '未知'}
                     </Text>
                     <Text variant="bodySmall" style={styles.statLabel}>
-                      Resolution
+                      分辨率
                     </Text>
                   </View>
 
@@ -501,10 +501,10 @@ export default function WallpaperScreen() {
                   <View style={styles.statBox}>
                     <Category size={20} color={paperTheme.colors.primary} />
                     <Text variant="titleMedium" style={styles.statValue}>
-                      {wallpaper.category || 'General'}
+                      {wallpaper.category || '常规'}
                     </Text>
                     <Text variant="bodySmall" style={styles.statLabel}>
-                      Category
+                      分类
                     </Text>
                   </View>
 
@@ -516,7 +516,7 @@ export default function WallpaperScreen() {
                       {wallpaper.purity ? wallpaper.purity.toUpperCase() : 'SFW'}
                     </Text>
                     <Text variant="bodySmall" style={styles.statLabel}>
-                      Purity
+                      纯度
                     </Text>
                   </View>
                 </View>
@@ -530,7 +530,7 @@ export default function WallpaperScreen() {
                       {wallpaper.views ? wallpaper.views.toLocaleString() : 0}
                     </Text>
                     <Text variant="bodySmall" style={styles.statLabel}>
-                      Views
+                      浏览量
                     </Text>
                   </View>
 
@@ -540,7 +540,7 @@ export default function WallpaperScreen() {
                       {wallpaper.favorites ? wallpaper.favorites.toLocaleString() : 0}
                     </Text>
                     <Text variant="bodySmall" style={styles.statLabel}>
-                      Favorites
+                      收藏数
                     </Text>
                   </View>
 
@@ -549,10 +549,10 @@ export default function WallpaperScreen() {
                     <Text variant="bodyMedium" style={styles.subStatValue}>
                       {wallpaper.file_size
                         ? `${(wallpaper.file_size / (1024 * 1024)).toFixed(1)} MB`
-                        : 'N/A'}
+                        : '未知'}
                     </Text>
                     <Text variant="bodySmall" style={styles.statLabel}>
-                      Size
+                      大小
                     </Text>
                   </View>
 
@@ -567,7 +567,7 @@ export default function WallpaperScreen() {
                         {wallpaper.uploader.username}
                       </Text>
                       <Text variant="bodySmall" style={styles.statLabel}>
-                        Uploader
+                        上传者
                       </Text>
                     </View>
                   )}
@@ -577,7 +577,7 @@ export default function WallpaperScreen() {
               {wallpaper.colors && wallpaper.colors.length > 0 && (
                 <View style={styles.section}>
                   <Text variant="titleSmall" style={styles.sectionHeader}>
-                    Color Palette
+                    色彩组合
                   </Text>
                   <View style={styles.paletteRow}>
                     {wallpaper.colors.map((hex, index) => (
@@ -597,7 +597,7 @@ export default function WallpaperScreen() {
                   <View style={styles.sectionHeaderRow}>
                     <TagIcon size={16} color={paperTheme.colors.primary} />
                     <Text variant="titleSmall" style={styles.sectionHeaderWithIcon}>
-                      Tags
+                      标签
                     </Text>
                   </View>
                   <View style={styles.tagsFlexWrapper}>
@@ -638,7 +638,7 @@ export default function WallpaperScreen() {
                     <ArrowCircleDown2 size={20} color={paperTheme.colors.primary} variant="Broken" />
                   )}
                   <Text style={[styles.buttonLabel, { color: paperTheme.colors.onSurface }]}>
-                    Download
+                    下载
                   </Text>
                 </TouchableOpacity>
               </BlurView>
@@ -662,7 +662,7 @@ export default function WallpaperScreen() {
                     <ImageIcon size={20} color={paperTheme.colors.primary} variant="Broken" />
                   )}
                   <Text style={[styles.buttonLabel, { color: paperTheme.colors.onSurface }]}>
-                    Apply Wallpaper
+                    设为壁纸
                   </Text>
                 </TouchableOpacity>
               </BlurView>
@@ -675,14 +675,14 @@ export default function WallpaperScreen() {
               onDismiss={() => setDownloadDialogVisible(false)}
               style={styles.dialogContainer}
             >
-              <Dialog.Title>Select Resolution</Dialog.Title>
+              <Dialog.Title>选择分辨率</Dialog.Title>
               <Dialog.Content>
                 <Button
                   mode="outlined"
                   onPress={() => downloadWallpaper('original')}
                   style={styles.downloadOptionBtn}
                 >
-                  Original ({wallpaper.resolution || 'High Quality'})
+                  原始尺寸（{wallpaper.resolution || '高质量'}）
                 </Button>
                 {wallpaper.thumbs?.large && (
                   <Button
@@ -690,7 +690,7 @@ export default function WallpaperScreen() {
                     onPress={() => downloadWallpaper('large')}
                     style={styles.downloadOptionBtn}
                   >
-                    Large Preview
+                    大图预览
                   </Button>
                 )}
                 {wallpaper.thumbs?.small && (
@@ -699,13 +699,13 @@ export default function WallpaperScreen() {
                     onPress={() => downloadWallpaper('small')}
                     style={styles.downloadOptionBtn}
                   >
-                    Small Thumbnail
+                    小尺寸缩略图
                   </Button>
                 )}
               </Dialog.Content>
               <Dialog.Actions>
                 <Button onPress={() => setDownloadDialogVisible(false)}>
-                  Cancel
+                  取消
                 </Button>
               </Dialog.Actions>
             </Dialog>
@@ -717,10 +717,10 @@ export default function WallpaperScreen() {
               dismissable={true}
               style={styles.dialogContainer}
             >
-              <Dialog.Title>Downloading Wallpaper</Dialog.Title>
+              <Dialog.Title>正在下载壁纸</Dialog.Title>
               <Dialog.Content>
                 <Text variant="bodyMedium" style={{ marginBottom: 12 }}>
-                  {Math.round(downloadProgress * 100)}% completed
+                  {Math.round(downloadProgress * 100)}% 已完成
                 </Text>
                 <ProgressBar
                   progress={downloadProgress}
@@ -729,7 +729,7 @@ export default function WallpaperScreen() {
                 />
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={cancelDownload}>Cancel</Button>
+                <Button onPress={cancelDownload}>取消</Button>
               </Dialog.Actions>
             </Dialog>
 
@@ -737,19 +737,19 @@ export default function WallpaperScreen() {
               visible={showFallbackDialog}
               onDismiss={() => setShowFallbackDialog(false)}
             >
-              <Dialog.Title>Download Issue</Dialog.Title>
+              <Dialog.Title>下载出现问题</Dialog.Title>
               <Dialog.Content>
-                <Text>{downloadError || 'Could not download the file.'}</Text>
+                <Text>{downloadError || '无法下载该文件。'}</Text>
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={() => setShowFallbackDialog(false)}>Cancel</Button>
+                <Button onPress={() => setShowFallbackDialog(false)}>取消</Button>
                 <Button
                   onPress={() => {
                     setShowFallbackDialog(false);
                     setWebViewVisible(true);
                   }}
                 >
-                  Manual Option
+                  手动下载
                 </Button>
               </Dialog.Actions>
             </Dialog>
@@ -759,25 +759,25 @@ export default function WallpaperScreen() {
               onDismiss={() => setWebViewVisible(false)}
               style={styles.fullWebViewDialog}
             >
-              <Dialog.Title>Long press image to save</Dialog.Title>
+              <Dialog.Title>长按图片即可保存</Dialog.Title>
               <Dialog.Content style={{ height: height * 0.55 }}>
                 <WebView source={{ uri: getDownloadUrl(selectedResolution) }} />
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={() => setWebViewVisible(false)}>Close</Button>
+                <Button onPress={() => setWebViewVisible(false)}>关闭</Button>
               </Dialog.Actions>
             </Dialog>
           </Portal>
         </>
       ) : (
         <View style={styles.centerContainer}>
-          <Text variant="titleMedium">Wallpaper not found</Text>
+          <Text variant="titleMedium">未找到该壁纸</Text>
           <Button
             mode="contained"
             onPress={() => router.back()}
             style={{ marginTop: 16 }}
           >
-            Go Back
+            返回
           </Button>
         </View>
       )}
