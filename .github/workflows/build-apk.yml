@@ -35,29 +35,79 @@ jobs:
           fi
           yes | "$SDKMAN" --licenses > /dev/null 2>&1 || true
           "$SDKMAN" --install "platforms;android-35" "build-tools;35.0.0" "platform-tools" > /dev/null
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          ls "$ANDROID_HOME/platforms"
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+
+      # 关键：移除 expo-dev-client，避免 release 包仍带开发客户端启动器
+      - name: Remove expo-dev-client
+        run: npm uninstall expo-dev-client
 
       - name: Expo prebuild
         run: npx expo prebuild --platform android --clean
         env:
           CI: 1
 
+      - name: Generate keystore
+        run: |
+          set -e
+          keytool -genkeypair -v \
+            -storetype PKCS12 \
+            -keystore android/app/release.keystore \
+            -alias shiori \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass shiori123 -keypass shiori123 \
+            -dname "CN=Shiori, OU=Dev, O=Dev, L=NA, ST=NA, C=CN"
+
+      - name: Configure signing
+        run: |
+          set -e
+          cat >> android/gradle.properties <<'EOF'
+          MYAPP_RELEASE_STORE_FILE=release.keystore
+          MYAPP_RELEASE_KEY_ALIAS=shiori
+          MYAPP_RELEASE_STORE_PASSWORD=shiori123
+          MYAPP_RELEASE_KEY_PASSWORD=shiori123
+          EOF
+          python3 - <<'PY'
+          import re, pathlib
+          p = pathlib.Path("android/app/build.gradle")
+          s = p.read_text()
+          if "signingConfigs" not in s:
+              s = s.replace(
+                  "android {",
+                  """android {
+    signingConfigs {
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
+    }
+""",
+                  1,
+              )
+          s = s.replace(
+              "release {",
+              "release {\n            signingConfig signingConfigs.release",
+              1,
+          )
+          p.write_text(s)
+          print(s[:2000])
+          PY
+
       - name: Grant execute permission for gradlew
         run: chmod +x android/gradlew
 
-      - name: Build debug APK
+      - name: Build release APK
         working-directory: android
-        run: ./gradlew assembleDebug --no-daemon -Dorg.gradle.jvmargs="-Xmx4g -XX:MaxMetaspaceSize=1g"
+        run: ./gradlew assembleRelease --no-daemon -Dorg.gradle.jvmargs="-Xmx4g -XX:MaxMetaspaceSize=1g"
         env:
           GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: shiori-cn-debug-apk
-          path: android/app/build/outputs/apk/debug/*.apk
+          name: shiori-cn-release-apk
+          path: android/app/build/outputs/apk/release/*.apk
           retention-days: 30
